@@ -32,7 +32,9 @@ exports.post_foo = function (req, res) {
     };
 
     console.info("Creazione di...");
-    console.dir(foo,{colors:true});
+    console.dir(foo, {
+        colors: true
+    });
 
     res.json(foo);
 };
@@ -65,7 +67,9 @@ exports.put_foo_by_id = function (req, res) {
     };
 
     console.info("Aggiornamento di...");
-    console.dir(foo,{colors:true});
+    console.dir(foo, {
+        colors: true
+    });
 
     res.json(foo);
 };
@@ -81,6 +85,38 @@ exports.delete_foo_by_id = function (req, res) {
 
     res.end();
 };
+
+exports.get_foos = function (req, res) {
+
+    if (!req.params.howMany) {
+        res.status(401).send("Non è stato indicato il parametro 'howMany'");
+        return;
+    }
+
+    var howMany=parseInt(req.params.howMany);
+
+    if (isNaN(howMany)) {
+        res.status(401).send("Il parametro 'howMany' non è un intero");
+        return;
+    }
+    
+    var arr=[];
+
+    for (var foo of foos(howMany)) {
+        arr.push(foo);
+    }
+
+    res.json(arr);
+}
+
+function* foos(howMany) {
+    for (var i = 0; i < howMany; i++) {
+        yield {
+            "fooId": getRandomId(1,1000),
+            "payload": `Questo è il foo ${i+1} di ${howMany}`
+        };
+    }
+}
 
 function getRandomId(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;

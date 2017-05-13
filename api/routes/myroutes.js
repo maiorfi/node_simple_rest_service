@@ -10,4 +10,7 @@ module.exports = function (app) {
 
     app.route('/foo')
         .post(myController.post_foo);
+
+    app.route('/foos/:howMany')
+        .get(myController.get_foos);
 };
