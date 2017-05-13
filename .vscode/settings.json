@@ -1,0 +1,6 @@
+{
+    "eslint.enable": true,
+    "jslint.options": {
+        "devel": true
+    }
+}
