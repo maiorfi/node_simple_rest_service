@@ -8,8 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}\\index.js",
-            "protocol": "inspector",
+            "program": "${workspaceRoot}\\server.js",
+            "protocol": "inspector"
         }
     ]
 }
